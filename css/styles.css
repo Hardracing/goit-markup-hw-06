@@ -524,6 +524,7 @@ li {
 
   color: var(--primary-bg-color);
   background-color: var(--accent-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
   font-weight: 700;
   font-size: 16px;
@@ -532,6 +533,14 @@ li {
 
   align-items: center;
   text-align: center;
+}
+
+.form-button:hover,
+.form-button:focus {
+  border-color: #188ce8;
+  background-color: #188ce8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
 }
 
 /* Особенности */
