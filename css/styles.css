@@ -261,6 +261,8 @@ li {
   margin-bottom: 0;
 }
 
+/* Модалка */
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -271,7 +273,6 @@ li {
   height: 1024px;
   background-color: rgba(0, 0, 0, 0.2);
 
-  opacity: 1;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -291,6 +292,7 @@ li {
 
   width: 528px;
   height: 581px;
+  padding: 40px;
   border-radius: 4px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -339,6 +341,8 @@ li {
 
   margin-top: 0;
   margin-bottom: 12px;
+
+  color: var(--title-text-color);
 }
 
 .modal-input {
@@ -347,27 +351,68 @@ li {
 
   display: flex;
   flex-direction: column;
-  padding: 40px;
+}
+
+.form {
+  font-size: 12px;
+  line-height: 1.16;
+
+  letter-spacing: 0.01em;
+
+  color: var(--primary-text-color);
+
+  display: flex;
+  flex-direction: column;
 }
 
 .form-field {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
 
-.form-field label {
-  display: flex;
-  justify-content: flex-start;
-  padding-bottom: 4px;
+.form-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
 }
 
-.form-field input {
+.form-field:nth-child(5n) {
+  margin-bottom: 0;
+}
+
+.form-field .form-label {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+
+.form-input {
+  position: relative;
   margin: 0;
   padding: 12px 42px;
   border: 1px solid rgba(33, 33, 33, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
+}
+
+.form-field:focus-within > .form-icon {
+  fill: var(--accent-color);
+}
+
+.form-input:hover,
+.form-field:hover,
+.form-textarea:hover {
+  fill: var(--accent-color);
+  border-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.form-input:focus {
+  border-color: var(--accent-color);
+  cursor: text;
+  outline: 0;
 }
 
 .form-checkbox {
@@ -377,36 +422,109 @@ li {
   color: var(--primary-text-color);
 }
 
-.form-field input::placeholder {
+.form-field .form-label::placeholder {
+  font-size: 14px;
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+
   color: rgba(117, 117, 117, 0.5);
 }
 
-.form-field textarea {
+.form-textarea {
   border: 1px solid rgba(33, 33, 33, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
   padding: 12px 16px;
 }
 
-.form-field textarea:hover {
-  cursor: pointer;
+.form-field:focus-within > .form-textarea {
   border-color: var(--accent-color);
+
+  cursor: text;
+  outline: 0;
 }
 
-textarea {
+.form-textarea {
   resize: none;
   height: 120px;
 }
 
-.form-checkbox {
+.checkbox-label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.03em;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.form-checkbox label {
+/* .form-checkbox .checkbox-label {
   margin-left: 7px;
+} */
+
+.checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.checkbox-text {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-text:before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 15px;
+  border: 2px solid var(--title-text-color);
+  border-radius: 2px;
+
+  margin-right: 7px;
+}
+
+.checkbox:checked + .checkbox-text:before {
+  border-color: transparent;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+  background-image: url('../images/icons/check.svg');
+  background-size: contain;
+  background-origin: border-box;
+}
+
+.checkbox-link {
+  margin-left: 5px;
+}
+
+.form-button {
+  padding: 10px 0;
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+
+  color: var(--primary-bg-color);
+  background-color: var(--accent-color);
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.87;
+  letter-spacing: 0.06em;
+
+  align-items: center;
+  text-align: center;
 }
 
 /* Особенности */
@@ -686,8 +804,6 @@ button:focus {
   flex-wrap: wrap;
 }
 
-/* calc ((100% - кол-во маржинов в строке * значение маржина) / кол-во єлементов в строке */
-
 .projects-element {
   width: calc((100% - 60px) / 3);
   margin-right: 30px;
@@ -818,6 +934,7 @@ button:focus {
 /* Подвал */
 
 .container-footer {
+  justify-content: space-between;
   align-items: baseline;
   display: flex;
   flex-wrap: wrap;
@@ -945,4 +1062,59 @@ button:focus {
   text-transform: uppercase;
 
   margin-bottom: 20px;
+}
+
+.subscribe {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 93px;
+  width: 570px;
+}
+
+.footer-form {
+  display: flex;
+  align-items: baseline;
+}
+
+.footer-input {
+  padding: 15px 16px;
+  margin-right: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  border-radius: 4px;
+  width: 358px;
+  height: 50px;
+
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-input::placeholder {
+  font-size: 16px;
+  line-height: 1.25;
+
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-button {
+  display: flex;
+
+  padding: 10px 29px;
+
+  color: var(--primary-bg-color);
+  background-color: var(--accent-color);
+
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.87;
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+.footer-button svg {
+  margin-left: 10px;
 }
