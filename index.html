@@ -445,7 +445,7 @@
                             </svg>
                         </button>
                         <div class="modal-input">
-                            <form class="form" autocomplete="off">
+                            <form class="form js-speaker-form" autocomplete="off">
                                 <h2 class="modal-title">Оставьте свои данные, мы вам перезвоним</h2>
                                 <label class="form-field">
                                     <span class="form-label">Имя</span>
@@ -482,6 +482,21 @@
                         </div>
                     </div>
                 </div>
+                    <script>
+                        (() => {
+                            document
+                                .querySelector('.js-speaker-form')
+                                .addEventListener('submit', e => {
+                                    e.preventDefault();
+
+                                    new FormData(e.currentTarget).forEach((value, name) =>
+                                        console.log(`${name}: ${value}`),
+                                    );
+
+                                    e.currentTarget.reset();
+                                });
+                        })();
+                    </script>
                     <script src="./JS/modal.js"></script>
 </body>
 
